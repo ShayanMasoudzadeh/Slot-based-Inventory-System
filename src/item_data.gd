@@ -1,0 +1,9 @@
+extends Resource
+class_name ItemData
+
+@export var id : String = ""
+@export var name : String = ""
+@export_multiline var description : String = ""
+@export var stackable : bool = false
+@export var stack_size : int = 99
+@export var icon : AtlasTexture
