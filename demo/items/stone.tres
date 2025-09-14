@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=3 format=3 uid="uid://bil5weww61kid"]
+
+[ext_resource type="Texture2D" uid="uid://e2kej0hthrfv" path="res://demo/assets/icons_atlas.tres" id="1_qr7ji"]
+[ext_resource type="Script" uid="uid://cnnb84ef6qat" path="res://src/item_data.gd" id="1_ye1yn"]
+
+[resource]
+script = ExtResource("1_ye1yn")
+id = "stone"
+name = "Stone"
+description = "A hard chunk of stone"
+stack_size = 60
+icon = ExtResource("1_qr7ji")
+metadata/_custom_type_script = "uid://cnnb84ef6qat"

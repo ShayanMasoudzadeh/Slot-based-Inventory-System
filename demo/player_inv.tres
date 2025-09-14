@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="InventoryData" load_steps=7 format=3 uid="uid://bb4beqlnaoahy"]
+
+[ext_resource type="Script" uid="uid://duaaoh5ibuydx" path="res://src/inventory_data.gd" id="1_wnju1"]
+[ext_resource type="Script" uid="uid://dfb3cg5dwokyd" path="res://src/slot_data.gd" id="2_xv657"]
+[ext_resource type="Resource" uid="uid://0yi02nc1h0vy" path="res://demo/items/wood.tres" id="3_xv657"]
+[ext_resource type="Resource" uid="uid://bil5weww61kid" path="res://demo/items/stone.tres" id="4_3dkmp"]
+
+[sub_resource type="Resource" id="Resource_3dkmp"]
+script = ExtResource("2_xv657")
+item_data = ExtResource("3_xv657")
+quantity = 60
+metadata/_custom_type_script = "uid://dfb3cg5dwokyd"
+
+[sub_resource type="Resource" id="Resource_5bat4"]
+script = ExtResource("2_xv657")
+item_data = ExtResource("4_3dkmp")
+quantity = 53
+metadata/_custom_type_script = "uid://dfb3cg5dwokyd"
+
+[resource]
+script = ExtResource("1_wnju1")
+slot_datas = Array[ExtResource("2_xv657")]([SubResource("Resource_3dkmp"), null, null, null, null, null, null, SubResource("Resource_5bat4"), null, null, null, null])
+metadata/_custom_type_script = "uid://duaaoh5ibuydx"
