@@ -1,35 +1,28 @@
-[gd_scene load_steps=3 format=3 uid="uid://bllxfiqj2rhk7"]
+[gd_scene load_steps=2 format=3 uid="uid://ca2nfu5f3mxon"]
 
-[ext_resource type="Script" uid="uid://1nj4k1jf6ttk" path="res://demo/Scenes/slot.gd" id="1_b6mnt"]
-[ext_resource type="Texture2D" uid="uid://bg5jrg3nctcs4" path="res://demo/assets/tile_0013.png" id="1_m4u8r"]
+[ext_resource type="Script" uid="uid://du0tcm0odticf" path="res://demo/Scenes/grabbed_slot.gd" id="1_qihnf"]
 
-[node name="Slot" type="PanelContainer"]
+[node name="GrabbedSlot" type="PanelContainer"]
+self_modulate = Color(1, 1, 1, 0)
 custom_minimum_size = Vector2(64, 64)
 offset_right = 40.0
 offset_bottom = 40.0
-script = ExtResource("1_b6mnt")
-
-[node name="NinePatchRect" type="NinePatchRect" parent="."]
-texture_filter = 1
-layout_mode = 2
-texture = ExtResource("1_m4u8r")
-patch_margin_left = 15
-patch_margin_top = 15
-patch_margin_right = 15
-patch_margin_bottom = 15
-axis_stretch_horizontal = 1
-axis_stretch_vertical = 1
+mouse_filter = 2
+script = ExtResource("1_qihnf")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 2
+mouse_filter = 2
 theme_override_constants/margin_left = 6
 theme_override_constants/margin_top = 6
 theme_override_constants/margin_right = 6
 theme_override_constants/margin_bottom = 6
 
 [node name="IconTexture" type="TextureRect" parent="MarginContainer"]
+modulate = Color(1, 1, 1, 0.686275)
 texture_filter = 1
 layout_mode = 2
+mouse_filter = 2
 expand_mode = 1
 stretch_mode = 5
 
@@ -42,5 +35,3 @@ theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 3
 horizontal_alignment = 2
 vertical_alignment = 2
-
-[connection signal="gui_input" from="." to="." method="_on_gui_input"]
