@@ -12,7 +12,7 @@ config_version=5
 
 config/name="Slot-Based Inventory"
 run/main_scene="uid://dcsrgwybd0j56"
-config/features=PackedStringArray("4.4", "Forward Plus")
+config/features=PackedStringArray("4.5", "Forward Plus")
 config/icon="res://icon.svg"
 
 [display]
