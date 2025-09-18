@@ -13,6 +13,17 @@ func get_slot_data(index: int) -> SlotData:
 		push_error("index out of slot data array bound")
 		return null
 
+func get_duplicate_slot_data(index: int) -> SlotData:
+	if index < slot_datas.size():
+		if slot_datas[index]:
+			var new_slot_data = SlotData.new(slot_datas[index].item_data, slot_datas[index].quantity)
+			return new_slot_data
+		else:
+			return null
+	else:
+		push_error("index out of slot data array bound")
+		return null
+
 func set_slot_data(index: int, slot_data: SlotData) -> void:
 	if index < slot_datas.size():
 		slot_datas[index] = slot_data
@@ -28,7 +39,7 @@ func clear_slot_data(index: int) -> void:
 		push_error("index out of slot data array bound")
 
 func add_to_slot_data(index: int, quantity: int) -> int:
-	var stack_size = slot_datas[index].item_data.stack_size
+	var stack_size = slot_datas[index].get_item_stack_size()
 	var current_quantity= slot_datas[index].quantity
 	var leftover
 	if current_quantity + quantity > stack_size:
@@ -40,16 +51,26 @@ func add_to_slot_data(index: int, quantity: int) -> int:
 	inventory_updated.emit(self)
 	return leftover
 
+func set_slot_quantity(index: int, quantity: int) -> void:
+	if index < slot_datas.size():
+		slot_datas[index].quantity = quantity
+		inventory_updated.emit(self)
+	else:
+		push_error("index out of slot data array bound")
+	
+
 func is_same_item(index: int, slot_data: SlotData) -> bool:
 	if slot_datas[index].get_item_id() == slot_data.get_item_id():
 		return true
 	else:
 		return false
 func is_slot_full(index) -> bool:
-	if slot_datas[index].quantity == slot_datas[index].item_data.stack_size:
+	if slot_datas[index].quantity == slot_datas[index].get_item_stack_size():
 		return true
 	else:
 		return false
+func is_slot_empty(index) -> bool:
+	return !slot_datas[index]
 
 func print_slot (index: int) -> void:
 	if slot_datas[index]:
