@@ -51,6 +51,21 @@ func add_to_slot_data(index: int, quantity: int) -> int:
 	inventory_updated.emit(self)
 	return leftover
 
+func add_to_inventory(slot_data: SlotData) -> bool:
+	var first_empty_slot_index : int = -1
+	for index in slot_datas.size():
+		if is_slot_empty(index) and first_empty_slot_index == -1:
+			first_empty_slot_index = index
+		if can_fully_merge(index, slot_data):
+			add_to_slot_data(index, slot_data.quantity)
+			inventory_updated.emit(self)
+			return true
+	if first_empty_slot_index != -1:
+		slot_datas[first_empty_slot_index] = slot_data
+		inventory_updated.emit(self)
+		return true
+	return false
+
 func set_slot_quantity(index: int, quantity: int) -> void:
 	if index < slot_datas.size():
 		slot_datas[index].quantity = quantity
@@ -59,11 +74,17 @@ func set_slot_quantity(index: int, quantity: int) -> void:
 		push_error("index out of slot data array bound")
 	
 
+func can_fully_merge(index: int, slot_data: SlotData) -> bool:
+	if slot_datas[index] and slot_data:
+		if is_same_item(index, slot_data) and \
+				slot_data.quantity <= (slot_datas[index].get_item_stack_size() - slot_datas[index].quantity):
+			return true
+	return false
 func is_same_item(index: int, slot_data: SlotData) -> bool:
-	if slot_datas[index].get_item_id() == slot_data.get_item_id():
-		return true
-	else:
-		return false
+	if slot_datas[index] and slot_data:
+		if slot_datas[index].get_item_id() == slot_data.get_item_id():
+			return true
+	return false
 func is_slot_full(index) -> bool:
 	if slot_datas[index].quantity == slot_datas[index].get_item_stack_size():
 		return true
