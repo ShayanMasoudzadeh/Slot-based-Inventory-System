@@ -11,6 +11,10 @@ func set_inventory_data(inventory_data: InventoryData) -> void:
 	inventory_data.inventory_updated.connect(popoulate_slot_grid)
 	popoulate_slot_grid(inventory_data)
 
+func disconnect_signals(inventory_data: InventoryData) -> void:
+	slot_interact.disconnect(inventory_data._on_slot_interact)
+	inventory_data.inventory_updated.disconnect(popoulate_slot_grid)
+
 func popoulate_slot_grid(inventory_data : InventoryData) -> void:
 	#clear children
 	for child in slot_grid.get_children():

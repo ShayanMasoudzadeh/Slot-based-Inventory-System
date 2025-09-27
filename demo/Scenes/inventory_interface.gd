@@ -1,8 +1,10 @@
 extends Control
 
 var grabbed_slot_data: SlotData
+var current_external_inventory_data: InventoryData 
 
 @onready var player_inventory: PanelContainer = $PlayerInventory
+@onready var external_inventory: PanelContainer = $ExternalInventory
 @onready var grabbed_slot: PanelContainer = $GrabbedSlot
 
 func _process(_delta: float) -> void:
@@ -12,6 +14,30 @@ func _process(_delta: float) -> void:
 func set_player_inventory_data(inventory_data: InventoryData) -> void:
 	inventory_data.inventory_interact.connect(_on_inventory_interact)
 	player_inventory.set_inventory_data(inventory_data)
+
+func set_external_inventory(external_inventory_data: InventoryData) -> void:
+	if current_external_inventory_data:
+		clear_external_inventory()
+	current_external_inventory_data = external_inventory_data
+	external_inventory_data.inventory_interact.connect(_on_inventory_interact)
+	external_inventory.set_inventory_data(external_inventory_data)
+
+func toggle_external_inventory(external_inventory_data: InventoryData) -> void:
+	if !current_external_inventory_data:
+		set_external_inventory(external_inventory_data)
+		external_inventory.show()
+	elif current_external_inventory_data == external_inventory_data:
+		clear_external_inventory()
+		external_inventory.hide()
+	else:
+		clear_external_inventory()
+		set_external_inventory(external_inventory_data)
+
+func clear_external_inventory() -> void:
+	current_external_inventory_data.inventory_interact.disconnect(_on_inventory_interact)
+	external_inventory.disconnect_signals(current_external_inventory_data)
+	current_external_inventory_data = null
+	
 
 func _on_inventory_interact(inventory_data: InventoryData, index: int, message: String) -> void:
 	match [grabbed_slot_data, message]:

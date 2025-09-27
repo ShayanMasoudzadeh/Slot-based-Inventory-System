@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://dcsrgwybd0j56"]
+[gd_scene load_steps=12 format=3 uid="uid://dcsrgwybd0j56"]
 
 [ext_resource type="Script" uid="uid://btny1lsbqjd2y" path="res://demo/Scenes/demo.gd" id="1_4wuso"]
 [ext_resource type="PackedScene" uid="uid://chesov7c7vxtk" path="res://demo/Scenes/inventory.tscn" id="1_rf8h5"]
@@ -15,14 +15,22 @@ script = ExtResource("5_qpcex")
 slot_datas = Array[ExtResource("6_bgdrs")]([null, null, null, null, null, null, null, null])
 metadata/_custom_type_script = "uid://duaaoh5ibuydx"
 
+[sub_resource type="Resource" id="Resource_qpcex"]
+script = ExtResource("5_qpcex")
+slot_datas = Array[ExtResource("6_bgdrs")]([null, null, null, null])
+metadata/_custom_type_script = "uid://duaaoh5ibuydx"
+
 [node name="Demo" type="Node"]
 script = ExtResource("1_4wuso")
 
 [node name="Player" parent="." instance=ExtResource("1_tp67h")]
 inventory_data = ExtResource("2_4wuso")
 
-[node name="Container" parent="." instance=ExtResource("4_5ccn5")]
+[node name="Container1" parent="." instance=ExtResource("4_5ccn5")]
 inventory_data = SubResource("Resource_5ccn5")
+
+[node name="Container2" parent="." instance=ExtResource("4_5ccn5")]
+inventory_data = SubResource("Resource_qpcex")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -81,5 +89,15 @@ text = "pick up 1 wood"
 layout_mode = 2
 text = "pick up 1 stone"
 
+[node name="Container1Button" type="Button" parent="CanvasLayer/UI/HBoxContainer"]
+layout_mode = 2
+text = "toggle container1"
+
+[node name="Container2Button" type="Button" parent="CanvasLayer/UI/HBoxContainer"]
+layout_mode = 2
+text = "toggle container2"
+
 [connection signal="pressed" from="CanvasLayer/UI/HBoxContainer/PickWoodButton" to="Player" method="_on_pick_wood_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/UI/HBoxContainer/PickStoneButton" to="Player" method="_on_pick_stone_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/UI/HBoxContainer/Container1Button" to="." method="_on_container1_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/UI/HBoxContainer/Container2Button" to="." method="_on_container_2_button_pressed"]
