@@ -49,8 +49,8 @@ func _on_inventory_interact(inventory_data: InventoryData, index: int, message: 
 			var clicked_slot = inventory_data.get_slot_data(index)
 			if !clicked_slot:
 				#put item
-				inventory_data.set_slot_data(index, grabbed_slot_data)
-				grabbed_slot_data = null
+				if inventory_data.set_slot_data(index, grabbed_slot_data) :
+					grabbed_slot_data = null
 			else:
 				if inventory_data.is_same_item(index, grabbed_slot_data) and !inventory_data.is_slot_full(index):
 					#add item
@@ -61,8 +61,8 @@ func _on_inventory_interact(inventory_data: InventoryData, index: int, message: 
 						grabbed_slot_data = null
 				else:
 					#swap item
-					inventory_data.set_slot_data(index, grabbed_slot_data)
-					grabbed_slot_data = clicked_slot
+					if inventory_data.set_slot_data(index, grabbed_slot_data):
+						grabbed_slot_data = clicked_slot
 		[null, "MOUSE_BUTTON_RIGHT"]:
 			#grab half items
 			grabbed_slot_data = inventory_data.get_duplicate_slot_data(index)
@@ -78,8 +78,8 @@ func _on_inventory_interact(inventory_data: InventoryData, index: int, message: 
 			if inventory_data.is_slot_empty(index):
 				var single_grabbed_slot_data = grabbed_slot_data.get_duplicate()
 				single_grabbed_slot_data.quantity = 1
-				inventory_data.set_slot_data(index, single_grabbed_slot_data)
-				grabbed_slot_data.quantity -= 1
+				if inventory_data.set_slot_data(index, single_grabbed_slot_data):
+					grabbed_slot_data.quantity -= 1
 				if grabbed_slot_data.quantity < 1:
 					grabbed_slot_data = null
 			elif inventory_data.is_same_item(index, grabbed_slot_data):
@@ -95,5 +95,7 @@ func update_grabbed_slot() -> void:
 	if grabbed_slot_data:
 		grabbed_slot.set_slot_data(grabbed_slot_data)
 		grabbed_slot.show()
+		Input.mouse_mode = Input.MOUSE_MODE_HIDDEN
 	else:
 		grabbed_slot.hide()
+		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE

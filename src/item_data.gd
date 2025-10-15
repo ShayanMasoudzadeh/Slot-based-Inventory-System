@@ -6,3 +6,6 @@ class_name ItemData
 @export_multiline var description : String = ""
 @export var stack_size : int = 99
 @export var icon : AtlasTexture
+
+@export var meta = {}
+@export var tags : Array[String]

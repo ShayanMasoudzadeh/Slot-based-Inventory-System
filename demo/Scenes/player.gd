@@ -20,3 +20,6 @@ func _on_pick_wood_button_pressed() -> void:
 
 func _on_pick_stone_button_pressed() -> void:
 	on_item_pickup(SlotData.new(load("res://demo/items/stone.tres"), 1))
+
+func _on_pick_armour_button_pressed() -> void:
+	on_item_pickup(SlotData.new(load("res://demo/items/armour.tres"), 1))

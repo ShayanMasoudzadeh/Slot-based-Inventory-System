@@ -5,6 +5,8 @@ signal inventory_updated(inventory_data: InventoryData)
 signal inventory_interact(inventory_data: InventoryData, index: int, message: String)
 
 @export var slot_datas : Array[SlotData]
+@export var accepted_item_tags : Array[String]
+
 
 func get_slot_data(index: int) -> SlotData:
 	if index < slot_datas.size():
@@ -16,20 +18,24 @@ func get_slot_data(index: int) -> SlotData:
 func get_duplicate_slot_data(index: int) -> SlotData:
 	if index < slot_datas.size():
 		if slot_datas[index]:
-			var new_slot_data = SlotData.new(slot_datas[index].item_data, slot_datas[index].quantity)
-			return new_slot_data
+			return slot_datas[index].get_duplicate()
 		else:
 			return null
 	else:
 		push_error("index out of slot data array bound")
 		return null
 
-func set_slot_data(index: int, slot_data: SlotData) -> void:
+func set_slot_data(index: int, slot_data: SlotData) -> bool:
 	if index < slot_datas.size():
-		slot_datas[index] = slot_data
-		inventory_updated.emit(self)
+		if has_accepted_tag(slot_data):
+			slot_datas[index] = slot_data
+			inventory_updated.emit(self)
+			return true
+		else: 
+			return false
 	else:
 		push_error("index out of slot data array bound")
+		return false
 
 func clear_slot_data(index: int) -> void:
 	if index < slot_datas.size():
@@ -52,6 +58,8 @@ func add_to_slot_data(index: int, quantity: int) -> int:
 	return leftover
 
 func add_to_inventory(slot_data: SlotData) -> bool:
+	if !has_accepted_tag(slot_data):
+		return false
 	var first_empty_slot_index : int = -1
 	for index in slot_datas.size():
 		if is_slot_empty(index) and first_empty_slot_index == -1:
@@ -72,8 +80,14 @@ func set_slot_quantity(index: int, quantity: int) -> void:
 		inventory_updated.emit(self)
 	else:
 		push_error("index out of slot data array bound")
-	
 
+func has_accepted_tag(slot_data: SlotData) -> bool:
+	if !accepted_item_tags.is_empty():
+		for tag in slot_data.get_item_tags():
+			for accepted_tag in accepted_item_tags:
+				if tag == accepted_tag: return true
+		return false
+	return true
 func can_fully_merge(index: int, slot_data: SlotData) -> bool:
 	if slot_datas[index] and slot_data:
 		if is_same_item(index, slot_data) and \
