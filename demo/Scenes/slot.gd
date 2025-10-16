@@ -16,6 +16,10 @@ func set_slot_data(slot_data : SlotData) -> void:
 			quantity_label.text = "%s" % slot_data.quantity
 			quantity_label.show()
 
+func set_slot_icon(icon: Texture2D) -> void:
+	icon_texture.texture = icon
+	icon_texture.modulate.a = 0.3
+
 func _on_gui_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton \
 			and (event.button_index == MOUSE_BUTTON_LEFT or event.button_index == MOUSE_BUTTON_RIGHT) \

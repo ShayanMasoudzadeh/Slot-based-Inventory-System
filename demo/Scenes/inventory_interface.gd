@@ -1,5 +1,7 @@
 extends Control
 
+signal drop_slot_data(slot_data: SlotData)
+
 var grabbed_slot_data: SlotData
 var current_external_inventory_data: InventoryData 
 
@@ -99,3 +101,20 @@ func update_grabbed_slot() -> void:
 	else:
 		grabbed_slot.hide()
 		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+
+func _on_gui_input(event: InputEvent) -> void:
+	if event is InputEventMouseButton \
+			and event.is_pressed() \
+			and grabbed_slot_data:
+		match event.button_index:
+			MOUSE_BUTTON_LEFT:
+				drop_slot_data.emit(grabbed_slot_data)
+				grabbed_slot_data = null
+			MOUSE_BUTTON_RIGHT:
+				var single_slot_data = grabbed_slot_data.get_duplicate()
+				single_slot_data.set_quantity(1)
+				drop_slot_data.emit(single_slot_data)
+				grabbed_slot_data.quantity -= 1
+				if grabbed_slot_data.quantity < 1:
+						grabbed_slot_data = null
+		update_grabbed_slot()

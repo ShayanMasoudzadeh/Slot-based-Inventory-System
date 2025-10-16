@@ -1,7 +1,11 @@
-[gd_resource type="Resource" script_class="ItemData" load_steps=3 format=3 uid="uid://bil5weww61kid"]
+[gd_resource type="Resource" script_class="ItemData" load_steps=4 format=3 uid="uid://bil5weww61kid"]
 
-[ext_resource type="Texture2D" uid="uid://e2kej0hthrfv" path="res://demo/assets/icons_atlas.tres" id="1_qr7ji"]
+[ext_resource type="Texture2D" uid="uid://b2rutpht1wqpe" path="res://demo/assets/#1 - Transparent Icons.png" id="1_qr7ji"]
 [ext_resource type="Script" uid="uid://cnnb84ef6qat" path="res://src/item_data.gd" id="1_ye1yn"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i5rej"]
+atlas = ExtResource("1_qr7ji")
+region = Rect2(32, 544, 32, 32)
 
 [resource]
 script = ExtResource("1_ye1yn")
@@ -9,5 +13,6 @@ id = "stone"
 name = "Stone"
 description = "A hard chunk of stone"
 stack_size = 60
-icon = ExtResource("1_qr7ji")
+icon = SubResource("AtlasTexture_i5rej")
+tags = Array[String](["material"])
 metadata/_custom_type_script = "uid://cnnb84ef6qat"

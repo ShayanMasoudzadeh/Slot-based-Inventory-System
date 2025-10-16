@@ -6,7 +6,7 @@ signal inventory_interact(inventory_data: InventoryData, index: int, message: St
 
 @export var slot_datas : Array[SlotData]
 @export var accepted_item_tags : Array[String]
-
+@export var empty_slot_icon : AtlasTexture
 
 func get_slot_data(index: int) -> SlotData:
 	if index < slot_datas.size():

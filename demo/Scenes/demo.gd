@@ -15,3 +15,7 @@ func _on_container1_button_pressed() -> void:
 
 func _on_container_2_button_pressed() -> void:
 	toggle_external_inventory($Container2.inventory_data)
+
+
+func _on_inventory_interface_drop_slot_data(slot_data: SlotData) -> void:
+	print("%s %s(s) dropped." % [slot_data.quantity, slot_data.item_data.name])

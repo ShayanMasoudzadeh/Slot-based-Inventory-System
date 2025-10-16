@@ -14,4 +14,5 @@ name = "Wood"
 description = "A piece of sturdy wood"
 stack_size = 60
 icon = SubResource("AtlasTexture_b0cyo")
+tags = Array[String](["material"])
 metadata/_custom_type_script = "uid://cnnb84ef6qat"

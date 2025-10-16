@@ -28,6 +28,8 @@ func popoulate_slot_grid(inventory_data : InventoryData) -> void:
 		
 		if slot_data:
 			slot.set_slot_data(slot_data)
+		elif inventory_data.empty_slot_icon:
+			slot.set_slot_icon(inventory_data.empty_slot_icon)
 
 func _on_slot_clicked(index: int, button: int) -> void:
 	var message: String

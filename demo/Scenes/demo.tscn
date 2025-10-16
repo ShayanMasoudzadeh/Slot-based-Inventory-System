@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://dcsrgwybd0j56"]
+[gd_scene load_steps=17 format=3 uid="uid://dcsrgwybd0j56"]
 
 [ext_resource type="Script" uid="uid://btny1lsbqjd2y" path="res://demo/Scenes/demo.gd" id="1_4wuso"]
 [ext_resource type="PackedScene" uid="uid://chesov7c7vxtk" path="res://demo/Scenes/inventory.tscn" id="1_rf8h5"]
@@ -11,15 +11,29 @@
 [ext_resource type="PackedScene" uid="uid://ca2nfu5f3mxon" path="res://demo/Scenes/grabbed_slot.tscn" id="6_d01u1"]
 [ext_resource type="Texture2D" uid="uid://b2rutpht1wqpe" path="res://demo/assets/#1 - Transparent Icons.png" id="10_qpcex"]
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_qpcex"]
+atlas = ExtResource("10_qpcex")
+region = Rect2(352, 608, 32, 32)
+
 [sub_resource type="Resource" id="Resource_5ccn5"]
 script = ExtResource("5_qpcex")
 slot_datas = Array[ExtResource("6_bgdrs")]([null, null, null, null, null, null, null, null])
+accepted_item_tags = Array[String](["material"])
+empty_slot_icon = SubResource("AtlasTexture_qpcex")
 metadata/_custom_type_script = "uid://duaaoh5ibuydx"
 
 [sub_resource type="Resource" id="Resource_qpcex"]
 script = ExtResource("5_qpcex")
 slot_datas = Array[ExtResource("6_bgdrs")]([null, null, null, null])
 metadata/_custom_type_script = "uid://duaaoh5ibuydx"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ldnim"]
+atlas = ExtResource("10_qpcex")
+region = Rect2(0, 544, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y4fsj"]
+atlas = ExtResource("10_qpcex")
+region = Rect2(32, 544, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_bgdrs"]
 atlas = ExtResource("10_qpcex")
@@ -63,6 +77,7 @@ grow_horizontal = 0
 
 [node name="GrabbedSlot" parent="CanvasLayer/InventoryInterface" instance=ExtResource("6_d01u1")]
 visible = false
+z_index = 1
 layout_mode = 0
 offset_right = 64.0
 offset_bottom = 64.0
@@ -86,29 +101,38 @@ offset_right = 252.0
 grow_vertical = 0
 theme_override_constants/separation = 10
 
-[node name="PickWoodButton" type="Button" parent="CanvasLayer/UI/HBoxContainer"]
+[node name="GridContainer" type="GridContainer" parent="CanvasLayer/UI/HBoxContainer"]
+layout_mode = 2
+columns = 2
+
+[node name="PickWoodButton" type="Button" parent="CanvasLayer/UI/HBoxContainer/GridContainer"]
 layout_mode = 2
 text = "pick up 1 wood"
+icon = SubResource("AtlasTexture_ldnim")
 
-[node name="PickStoneButton" type="Button" parent="CanvasLayer/UI/HBoxContainer"]
+[node name="PickStoneButton" type="Button" parent="CanvasLayer/UI/HBoxContainer/GridContainer"]
 layout_mode = 2
 text = "pick up 1 stone"
+icon = SubResource("AtlasTexture_y4fsj")
+
+[node name="PickArmourButton" type="Button" parent="CanvasLayer/UI/HBoxContainer/GridContainer"]
+layout_mode = 2
+text = "pick up 1 armour"
+icon = SubResource("AtlasTexture_bgdrs")
 
 [node name="Container1Button" type="Button" parent="CanvasLayer/UI/HBoxContainer"]
 layout_mode = 2
-text = "toggle container1"
+text = "toggle material 
+container"
 
 [node name="Container2Button" type="Button" parent="CanvasLayer/UI/HBoxContainer"]
 layout_mode = 2
 text = "toggle container2"
 
-[node name="PickArmourButton" type="Button" parent="CanvasLayer/UI/HBoxContainer"]
-layout_mode = 2
-text = "pick up 1 armour"
-icon = SubResource("AtlasTexture_bgdrs")
-
-[connection signal="pressed" from="CanvasLayer/UI/HBoxContainer/PickWoodButton" to="Player" method="_on_pick_wood_button_pressed"]
-[connection signal="pressed" from="CanvasLayer/UI/HBoxContainer/PickStoneButton" to="Player" method="_on_pick_stone_button_pressed"]
+[connection signal="drop_slot_data" from="CanvasLayer/InventoryInterface" to="." method="_on_inventory_interface_drop_slot_data"]
+[connection signal="gui_input" from="CanvasLayer/InventoryInterface" to="CanvasLayer/InventoryInterface" method="_on_gui_input"]
+[connection signal="pressed" from="CanvasLayer/UI/HBoxContainer/GridContainer/PickWoodButton" to="Player" method="_on_pick_wood_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/UI/HBoxContainer/GridContainer/PickStoneButton" to="Player" method="_on_pick_stone_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/UI/HBoxContainer/GridContainer/PickArmourButton" to="Player" method="_on_pick_armour_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/UI/HBoxContainer/Container1Button" to="." method="_on_container1_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/UI/HBoxContainer/Container2Button" to="." method="_on_container_2_button_pressed"]
-[connection signal="pressed" from="CanvasLayer/UI/HBoxContainer/PickArmourButton" to="Player" method="_on_pick_armour_button_pressed"]
