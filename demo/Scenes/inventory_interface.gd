@@ -5,7 +5,10 @@ signal drop_slot_data(slot_data: SlotData)
 var grabbed_slot_data: SlotData
 var current_external_inventory_data: InventoryData 
 
-@onready var player_inventory: PanelContainer = $PlayerInventory
+@onready var player_inventory: PanelContainer = $HBoxContainer/PlayerInventory
+@onready var player_headgear_inventory: PanelContainer = $HBoxContainer/VBoxContainer/PlayerHeadgearInventory
+@onready var player_chestgear_inventory: PanelContainer = $HBoxContainer/VBoxContainer/PlayerChestgearInventory
+@onready var player_footgear_inventory: PanelContainer = $HBoxContainer/VBoxContainer/PlayerFootgearInventory
 @onready var external_inventory: PanelContainer = $ExternalInventory
 @onready var grabbed_slot: PanelContainer = $GrabbedSlot
 
@@ -13,9 +16,15 @@ func _process(_delta: float) -> void:
 	if grabbed_slot.visible:
 		grabbed_slot.global_position = get_global_mouse_position() - Vector2(32, 32)
 
-func set_player_inventory_data(inventory_data: InventoryData) -> void:
+func set_player_inventory_data(inventory_data: InventoryData, headgear_data: InventoryData, chestgear_data: InventoryData, footgear_data: InventoryData) -> void:
 	inventory_data.inventory_interact.connect(_on_inventory_interact)
 	player_inventory.set_inventory_data(inventory_data)
+	headgear_data.inventory_interact.connect(_on_inventory_interact)
+	player_headgear_inventory.set_inventory_data(headgear_data)
+	chestgear_data.inventory_interact.connect(_on_inventory_interact)
+	player_chestgear_inventory.set_inventory_data(chestgear_data)
+	footgear_data.inventory_interact.connect(_on_inventory_interact)
+	player_footgear_inventory.set_inventory_data(footgear_data)
 
 func set_external_inventory(external_inventory_data: InventoryData) -> void:
 	if current_external_inventory_data:

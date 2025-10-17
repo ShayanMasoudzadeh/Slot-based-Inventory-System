@@ -6,8 +6,6 @@
 [node name="Inventory" type="PanelContainer"]
 offset_right = 30.0
 offset_bottom = 30.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
 script = ExtResource("1_gxh4b")
 
 [node name="NinePatchBG" type="NinePatchRect" parent="."]

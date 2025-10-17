@@ -1,6 +1,9 @@
 extends Node
 
 @export var inventory_data : InventoryData
+@export var chestgear_inventory_data : InventoryData
+@export var headgear_inventory_data : InventoryData
+@export var footgear_inventory_data : InventoryData
 
 func on_item_pickup(slot_data: SlotData) -> void:
 	for i in range(slot_data.quantity):

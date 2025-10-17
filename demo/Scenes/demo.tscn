@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://dcsrgwybd0j56"]
+[gd_scene load_steps=23 format=3 uid="uid://dcsrgwybd0j56"]
 
 [ext_resource type="Script" uid="uid://btny1lsbqjd2y" path="res://demo/Scenes/demo.gd" id="1_4wuso"]
 [ext_resource type="PackedScene" uid="uid://chesov7c7vxtk" path="res://demo/Scenes/inventory.tscn" id="1_rf8h5"]
@@ -10,6 +10,39 @@
 [ext_resource type="Script" uid="uid://dfb3cg5dwokyd" path="res://src/slot_data.gd" id="6_bgdrs"]
 [ext_resource type="PackedScene" uid="uid://ca2nfu5f3mxon" path="res://demo/Scenes/grabbed_slot.tscn" id="6_d01u1"]
 [ext_resource type="Texture2D" uid="uid://b2rutpht1wqpe" path="res://demo/assets/#1 - Transparent Icons.png" id="10_qpcex"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b1duo"]
+atlas = ExtResource("10_qpcex")
+region = Rect2(224, 224, 32, 32)
+
+[sub_resource type="Resource" id="Resource_5et70"]
+script = ExtResource("5_qpcex")
+slot_datas = Array[ExtResource("6_bgdrs")]([null])
+accepted_item_tags = Array[String](["chest_gear"])
+empty_slot_icon = SubResource("AtlasTexture_b1duo")
+metadata/_custom_type_script = "uid://duaaoh5ibuydx"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_55lo8"]
+atlas = ExtResource("10_qpcex")
+region = Rect2(32, 224, 32, 32)
+
+[sub_resource type="Resource" id="Resource_nvxib"]
+script = ExtResource("5_qpcex")
+slot_datas = Array[ExtResource("6_bgdrs")]([null])
+accepted_item_tags = Array[String](["head_gear"])
+empty_slot_icon = SubResource("AtlasTexture_55lo8")
+metadata/_custom_type_script = "uid://duaaoh5ibuydx"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ee5ur"]
+atlas = ExtResource("10_qpcex")
+region = Rect2(96, 256, 32, 32)
+
+[sub_resource type="Resource" id="Resource_cxict"]
+script = ExtResource("5_qpcex")
+slot_datas = Array[ExtResource("6_bgdrs")]([null])
+accepted_item_tags = Array[String](["foot_gear"])
+empty_slot_icon = SubResource("AtlasTexture_ee5ur")
+metadata/_custom_type_script = "uid://duaaoh5ibuydx"
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_qpcex"]
 atlas = ExtResource("10_qpcex")
@@ -44,6 +77,9 @@ script = ExtResource("1_4wuso")
 
 [node name="Player" parent="." instance=ExtResource("1_tp67h")]
 inventory_data = ExtResource("2_4wuso")
+chestgear_inventory_data = SubResource("Resource_5et70")
+headgear_inventory_data = SubResource("Resource_nvxib")
+footgear_inventory_data = SubResource("Resource_cxict")
 
 [node name="Container1" parent="." instance=ExtResource("4_5ccn5")]
 inventory_data = SubResource("Resource_5ccn5")
@@ -62,8 +98,26 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("4_biukc")
 
-[node name="PlayerInventory" parent="CanvasLayer/InventoryInterface" instance=ExtResource("1_rf8h5")]
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/InventoryInterface"]
 layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/InventoryInterface/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="PlayerHeadgearInventory" parent="CanvasLayer/InventoryInterface/HBoxContainer/VBoxContainer" instance=ExtResource("1_rf8h5")]
+layout_mode = 2
+
+[node name="PlayerChestgearInventory" parent="CanvasLayer/InventoryInterface/HBoxContainer/VBoxContainer" instance=ExtResource("1_rf8h5")]
+layout_mode = 2
+
+[node name="PlayerFootgearInventory" parent="CanvasLayer/InventoryInterface/HBoxContainer/VBoxContainer" instance=ExtResource("1_rf8h5")]
+layout_mode = 2
+
+[node name="PlayerInventory" parent="CanvasLayer/InventoryInterface/HBoxContainer" instance=ExtResource("1_rf8h5")]
+layout_mode = 2
 
 [node name="ExternalInventory" parent="CanvasLayer/InventoryInterface" instance=ExtResource("1_rf8h5")]
 visible = false

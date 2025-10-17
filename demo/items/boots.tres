@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=3 format=3 uid="uid://b6i5lbkrf8jst"]
+
+[ext_resource type="Texture2D" uid="uid://e2kej0hthrfv" path="res://demo/assets/icons_atlas.tres" id="1_ombek"]
+[ext_resource type="Script" uid="uid://cnnb84ef6qat" path="res://src/item_data.gd" id="1_ybmyl"]
+
+[resource]
+script = ExtResource("1_ybmyl")
+id = "boots"
+name = "Boots"
+stack_size = 1
+icon = ExtResource("1_ombek")
+tags = Array[String](["foot_gear", "equippable"])
+metadata/_custom_type_script = "uid://cnnb84ef6qat"
