@@ -1,0 +1,52 @@
+[gd_resource type="Theme" load_steps=6 format=3 uid="uid://dw1ud1cj8ntu7"]
+
+[ext_resource type="FontFile" uid="uid://0dxrlodpwin3" path="res://demo/assets/font/Jersey10-Regular.ttf" id="1_f3hjy"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_u5pqw"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_f3hjy"]
+content_margin_left = 10.0
+content_margin_top = 10.0
+content_margin_right = 10.0
+content_margin_bottom = 10.0
+bg_color = Color(0.77254903, 0.5294118, 0.2784314, 1)
+border_width_bottom = 3
+border_color = Color(0.42745098, 0.29411766, 0.15294118, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_u5pqw"]
+content_margin_left = 10.0
+content_margin_top = 10.0
+content_margin_right = 10.0
+content_margin_bottom = 10.0
+bg_color = Color(0.6392157, 0.4392157, 0.22745098, 1)
+border_width_bottom = 3
+border_color = Color(0.42745098, 0.29411766, 0.15294118, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_blsbh"]
+content_margin_left = 10.0
+content_margin_top = 10.0
+content_margin_right = 10.0
+content_margin_bottom = 10.0
+bg_color = Color(0.3268948, 0.21375564, 0.0924866, 1)
+border_width_bottom = 3
+border_color = Color(0.16568506, 0.10400177, 0.038423307, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[resource]
+Button/font_sizes/font_size = 22
+Button/fonts/font = ExtResource("1_f3hjy")
+Button/styles/focus = SubResource("StyleBoxEmpty_u5pqw")
+Button/styles/hover = SubResource("StyleBoxFlat_f3hjy")
+Button/styles/normal = SubResource("StyleBoxFlat_u5pqw")
+Button/styles/pressed = SubResource("StyleBoxFlat_blsbh")

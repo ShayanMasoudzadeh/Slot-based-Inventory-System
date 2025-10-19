@@ -3,7 +3,6 @@ class_name SlotData
 
 @export var item_data : ItemData
 @export var quantity : int : set = set_quantity
-@export var accepted_item_tags : Array[String]
 
 func _init(_item_data: ItemData = null, _quantity: int = 0) -> void:
 	item_data = _item_data

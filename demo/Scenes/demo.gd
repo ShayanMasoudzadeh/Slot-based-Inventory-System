@@ -5,6 +5,7 @@ extends Node
 
 func _ready() -> void:
 	inventory_interface.set_player_inventory_data(player.inventory_data, player.headgear_inventory_data, player.chestgear_inventory_data, player.footgear_inventory_data)
+	inventory_interface.interface_sound.connect($UIAudio.play_inventory_interface_sound)
 
 func toggle_external_inventory(inventory_data: InventoryData) -> void:
 	inventory_interface.toggle_external_inventory(inventory_data)

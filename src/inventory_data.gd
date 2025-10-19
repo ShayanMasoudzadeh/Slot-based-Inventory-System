@@ -81,6 +81,20 @@ func set_slot_quantity(index: int, quantity: int) -> void:
 	else:
 		push_error("index out of slot data array bound")
 
+func inv_has_item(item_id : String) -> bool:
+	for slot_data in slot_datas:
+		if slot_data:
+			if slot_data.get_item_id() == item_id:
+				return true
+	return false
+func inv_item_total_quantity(item_id : String) -> int:
+	var sum = 0
+	for slot_data in slot_datas:
+		if slot_data:
+			if slot_data.get_item_id() == item_id:
+				sum += slot_data.quantity
+	return sum 
+
 func has_accepted_tag(slot_data: SlotData) -> bool:
 	if !accepted_item_tags.is_empty():
 		for tag in slot_data.get_item_tags():

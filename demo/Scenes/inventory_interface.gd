@@ -1,6 +1,7 @@
 extends Control
 
 signal drop_slot_data(slot_data: SlotData)
+signal interface_sound(stream : String)
 
 var grabbed_slot_data: SlotData
 var current_external_inventory_data: InventoryData 
@@ -56,12 +57,14 @@ func _on_inventory_interact(inventory_data: InventoryData, index: int, message: 
 			#grab item
 			grabbed_slot_data = inventory_data.get_slot_data(index)
 			inventory_data.clear_slot_data(index)
+			interface_sound.emit("grab")
 		[_, "MOUSE_BUTTON_LEFT"]:
 			var clicked_slot = inventory_data.get_slot_data(index)
 			if !clicked_slot:
 				#put item
 				if inventory_data.set_slot_data(index, grabbed_slot_data) :
 					grabbed_slot_data = null
+					interface_sound.emit("put")
 			else:
 				if inventory_data.is_same_item(index, grabbed_slot_data) and !inventory_data.is_slot_full(index):
 					#add item
@@ -70,10 +73,12 @@ func _on_inventory_interact(inventory_data: InventoryData, index: int, message: 
 						grabbed_slot_data.quantity = leftover
 					else:
 						grabbed_slot_data = null
+					interface_sound.emit("put")
 				else:
 					#swap item
 					if inventory_data.set_slot_data(index, grabbed_slot_data):
 						grabbed_slot_data = clicked_slot
+						interface_sound.emit("grab")
 		[null, "MOUSE_BUTTON_RIGHT"]:
 			#grab half items
 			grabbed_slot_data = inventory_data.get_duplicate_slot_data(index)
@@ -83,9 +88,11 @@ func _on_inventory_interact(inventory_data: InventoryData, index: int, message: 
 					@warning_ignore("integer_division")
 					grabbed_slot_data.quantity = grabbed_slot_data.quantity / 2
 					inventory_data.set_slot_quantity(index, initial_quantity - grabbed_slot_data.quantity)
+					interface_sound.emit("grab")
 				else:
 					grabbed_slot_data = null
 		[_, "MOUSE_BUTTON_RIGHT"]:
+			#put single item
 			if inventory_data.is_slot_empty(index):
 				var single_grabbed_slot_data = grabbed_slot_data.get_duplicate()
 				single_grabbed_slot_data.quantity = 1
@@ -93,12 +100,15 @@ func _on_inventory_interact(inventory_data: InventoryData, index: int, message: 
 					grabbed_slot_data.quantity -= 1
 				if grabbed_slot_data.quantity < 1:
 					grabbed_slot_data = null
+				interface_sound.emit("put")
+			#add single item
 			elif inventory_data.is_same_item(index, grabbed_slot_data):
 				var leftover = inventory_data.add_to_slot_data(index, 1)
 				if leftover == 0:
 					grabbed_slot_data.quantity -= 1
 					if grabbed_slot_data.quantity < 1:
 						grabbed_slot_data = null
+					interface_sound.emit("put")
 	
 	update_grabbed_slot()
 
@@ -127,3 +137,4 @@ func _on_gui_input(event: InputEvent) -> void:
 				if grabbed_slot_data.quantity < 1:
 						grabbed_slot_data = null
 		update_grabbed_slot()
+		interface_sound.emit("put")

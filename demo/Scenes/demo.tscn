@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://dcsrgwybd0j56"]
+[gd_scene load_steps=28 format=3 uid="uid://dcsrgwybd0j56"]
 
 [ext_resource type="Script" uid="uid://btny1lsbqjd2y" path="res://demo/Scenes/demo.gd" id="1_4wuso"]
 [ext_resource type="PackedScene" uid="uid://chesov7c7vxtk" path="res://demo/Scenes/inventory.tscn" id="1_rf8h5"]
@@ -10,6 +10,11 @@
 [ext_resource type="Script" uid="uid://dfb3cg5dwokyd" path="res://src/slot_data.gd" id="6_bgdrs"]
 [ext_resource type="PackedScene" uid="uid://ca2nfu5f3mxon" path="res://demo/Scenes/grabbed_slot.tscn" id="6_d01u1"]
 [ext_resource type="Texture2D" uid="uid://b2rutpht1wqpe" path="res://demo/assets/#1 - Transparent Icons.png" id="10_qpcex"]
+[ext_resource type="Theme" uid="uid://dw1ud1cj8ntu7" path="res://demo/UI/buttons_theme.tres" id="12_ldnim"]
+[ext_resource type="Script" uid="uid://v5as1dodl3n4" path="res://demo/Scenes/ui_audio.gd" id="12_y4fsj"]
+[ext_resource type="AudioStream" uid="uid://608fc5lnsgw1" path="res://demo/assets/audio/UI sounds/click1.ogg" id="13_b1duo"]
+[ext_resource type="AudioStream" uid="uid://cerpl2itfj6qc" path="res://demo/assets/audio/UI sounds/rollover2.ogg" id="14_b1duo"]
+[ext_resource type="AudioStream" uid="uid://c6ujiuvsc51yh" path="res://demo/assets/audio/UI sounds/rollover5.ogg" id="15_5et70"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_b1duo"]
 atlas = ExtResource("10_qpcex")
@@ -91,9 +96,11 @@ inventory_data = SubResource("Resource_qpcex")
 
 [node name="InventoryInterface" type="Control" parent="CanvasLayer"]
 layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
+anchors_preset = 0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 790.0
+offset_bottom = 590.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("4_biukc")
@@ -138,20 +145,26 @@ offset_bottom = 64.0
 
 [node name="UI" type="Control" parent="CanvasLayer"]
 layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
+anchors_preset = 0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 790.0
+offset_bottom = 590.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
 [node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/UI"]
 layout_mode = 1
-anchors_preset = 2
+anchors_preset = 7
+anchor_left = 0.5
 anchor_top = 1.0
+anchor_right = 0.5
 anchor_bottom = 1.0
-offset_top = -40.0
-offset_right = 252.0
+offset_left = -402.0
+offset_top = -108.0
+offset_right = 402.0
+grow_horizontal = 2
 grow_vertical = 0
 theme_override_constants/separation = 10
 
@@ -159,29 +172,59 @@ theme_override_constants/separation = 10
 layout_mode = 2
 columns = 2
 
-[node name="PickWoodButton" type="Button" parent="CanvasLayer/UI/HBoxContainer/GridContainer"]
+[node name="PickWoodButton" type="Button" parent="CanvasLayer/UI/HBoxContainer/GridContainer" groups=["ui_button"]]
 layout_mode = 2
+theme = ExtResource("12_ldnim")
 text = "pick up 1 wood"
 icon = SubResource("AtlasTexture_ldnim")
 
-[node name="PickStoneButton" type="Button" parent="CanvasLayer/UI/HBoxContainer/GridContainer"]
+[node name="PickStoneButton" type="Button" parent="CanvasLayer/UI/HBoxContainer/GridContainer" groups=["ui_button"]]
 layout_mode = 2
+theme = ExtResource("12_ldnim")
 text = "pick up 1 stone"
 icon = SubResource("AtlasTexture_y4fsj")
 
-[node name="PickArmourButton" type="Button" parent="CanvasLayer/UI/HBoxContainer/GridContainer"]
+[node name="PickArmourButton" type="Button" parent="CanvasLayer/UI/HBoxContainer/GridContainer" groups=["ui_button"]]
 layout_mode = 2
+theme = ExtResource("12_ldnim")
 text = "pick up 1 armour"
 icon = SubResource("AtlasTexture_bgdrs")
 
-[node name="Container1Button" type="Button" parent="CanvasLayer/UI/HBoxContainer"]
+[node name="Container1Button" type="Button" parent="CanvasLayer/UI/HBoxContainer" groups=["ui_button"]]
 layout_mode = 2
+size_flags_vertical = 0
+theme = ExtResource("12_ldnim")
 text = "toggle material 
 container"
 
-[node name="Container2Button" type="Button" parent="CanvasLayer/UI/HBoxContainer"]
+[node name="Container2Button" type="Button" parent="CanvasLayer/UI/HBoxContainer" groups=["ui_button"]]
 layout_mode = 2
+size_flags_vertical = 0
+theme = ExtResource("12_ldnim")
 text = "toggle container2"
+
+[node name="PrintDefenceButton" type="Button" parent="CanvasLayer/UI/HBoxContainer" groups=["ui_button"]]
+layout_mode = 2
+size_flags_vertical = 0
+theme = ExtResource("12_ldnim")
+text = "print defence"
+
+[node name="UIAudio" type="Node" parent="."]
+script = ExtResource("12_y4fsj")
+
+[node name="UIClick" type="AudioStreamPlayer" parent="UIAudio"]
+stream = ExtResource("13_b1duo")
+volume_db = -10.0
+
+[node name="UIPut" type="AudioStreamPlayer" parent="UIAudio"]
+stream = ExtResource("14_b1duo")
+volume_db = -15.0
+pitch_scale = 0.8
+
+[node name="UIGrab" type="AudioStreamPlayer" parent="UIAudio"]
+stream = ExtResource("15_5et70")
+volume_db = -15.0
+pitch_scale = 1.3
 
 [connection signal="drop_slot_data" from="CanvasLayer/InventoryInterface" to="." method="_on_inventory_interface_drop_slot_data"]
 [connection signal="gui_input" from="CanvasLayer/InventoryInterface" to="CanvasLayer/InventoryInterface" method="_on_gui_input"]
@@ -190,3 +233,4 @@ text = "toggle container2"
 [connection signal="pressed" from="CanvasLayer/UI/HBoxContainer/GridContainer/PickArmourButton" to="Player" method="_on_pick_armour_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/UI/HBoxContainer/Container1Button" to="." method="_on_container1_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/UI/HBoxContainer/Container2Button" to="." method="_on_container_2_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/UI/HBoxContainer/PrintDefenceButton" to="Player" method="_on_print_defence_button_pressed"]

@@ -17,6 +17,15 @@ func on_item_pickup(slot_data: SlotData) -> void:
 			break
 	#code for deleting the picked up item from world
 
+func calculate_total_defence() -> float:
+	var armour_datas : Array[InventoryData] = [chestgear_inventory_data, headgear_inventory_data, footgear_inventory_data]
+	var total_defence := 0.0
+	for armour_data in armour_datas:
+		if !armour_data.is_slot_empty(0):
+			var defence_value = armour_data.get_slot_data(0).get_item_meta_value("defence")
+			if defence_value:
+				total_defence += defence_value
+	return total_defence
 
 func _on_pick_wood_button_pressed() -> void:
 	on_item_pickup(SlotData.new(load("res://demo/items/wood.tres"), 1))
@@ -26,3 +35,7 @@ func _on_pick_stone_button_pressed() -> void:
 
 func _on_pick_armour_button_pressed() -> void:
 	on_item_pickup(SlotData.new(load("res://demo/items/armour.tres"), 1))
+
+
+func _on_print_defence_button_pressed() -> void:
+	print(calculate_total_defence())
