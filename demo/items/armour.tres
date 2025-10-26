@@ -15,7 +15,7 @@ description = "Can save your life!"
 stack_size = 1
 icon = SubResource("AtlasTexture_hi4ae")
 meta = {
-"defence": 10.0
+"defense": 10.0
 }
 tags = Array[String](["chest_gear", "equippable"])
 metadata/_custom_type_script = "uid://cnnb84ef6qat"

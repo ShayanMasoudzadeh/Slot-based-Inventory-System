@@ -11,10 +11,11 @@ region = Rect2(96, 256, 32, 32)
 script = ExtResource("1_ybmyl")
 id = "boots"
 name = "Boots"
+description = "Keeps your feet warm... and secure"
 stack_size = 1
 icon = SubResource("AtlasTexture_ivhs5")
 meta = {
-"defence": 4.0
+"defense": 4.0
 }
 tags = Array[String](["foot_gear", "equippable"])
 metadata/_custom_type_script = "uid://cnnb84ef6qat"

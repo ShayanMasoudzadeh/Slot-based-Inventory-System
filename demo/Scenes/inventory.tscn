@@ -1,33 +1,16 @@
 [gd_scene load_steps=3 format=3 uid="uid://chesov7c7vxtk"]
 
 [ext_resource type="Script" uid="uid://cuv4f1s7swb8r" path="res://demo/Scenes/inventory.gd" id="1_gxh4b"]
-[ext_resource type="Texture2D" uid="uid://slpex6xywchp" path="res://demo/assets/tile_0030.png" id="1_nrkop"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_nrkop"]
 
 [node name="Inventory" type="PanelContainer"]
 offset_right = 30.0
 offset_bottom = 30.0
+theme_override_styles/panel = SubResource("StyleBoxEmpty_nrkop")
 script = ExtResource("1_gxh4b")
 
-[node name="NinePatchBG" type="NinePatchRect" parent="."]
-texture_filter = 1
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-texture = ExtResource("1_nrkop")
-region_rect = Rect2(0, 0, 32, 32)
-patch_margin_left = 15
-patch_margin_top = 15
-patch_margin_right = 15
-patch_margin_bottom = 15
-
-[node name="MarginContainer" type="MarginContainer" parent="."]
-layout_mode = 2
-theme_override_constants/margin_left = 10
-theme_override_constants/margin_top = 10
-theme_override_constants/margin_right = 10
-theme_override_constants/margin_bottom = 10
-
-[node name="SlotGrid" type="GridContainer" parent="MarginContainer"]
+[node name="SlotGrid" type="GridContainer" parent="."]
 layout_mode = 2
 theme_override_constants/h_separation = 0
 theme_override_constants/v_separation = 0

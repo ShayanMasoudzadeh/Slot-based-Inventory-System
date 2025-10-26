@@ -11,7 +11,7 @@ description = "Protects your brain."
 stack_size = 1
 icon = ExtResource("1_l2vyj")
 meta = {
-"defence": 6.0
+"defense": 6.0
 }
 tags = Array[String](["head_gear", "equippable"])
 metadata/_custom_type_script = "uid://cnnb84ef6qat"

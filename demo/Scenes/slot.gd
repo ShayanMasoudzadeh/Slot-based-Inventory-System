@@ -11,6 +11,8 @@ func set_slot_data(slot_data : SlotData) -> void:
 		var item_data = slot_data.item_data
 		icon_texture.texture = item_data.icon
 		tooltip_text = "%s\n%s" % [item_data.name, item_data.description]
+		for meta in item_data.meta:
+			tooltip_text += "\n%s: %s" % [meta, item_data.meta[meta]]
 		
 		if slot_data.quantity > 1:
 			quantity_label.text = "%s" % slot_data.quantity

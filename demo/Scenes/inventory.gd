@@ -4,7 +4,12 @@ const Slot = preload("res://demo/Scenes/slot.tscn")
 
 signal slot_interact(index: int, message: String)
 
-@onready var slot_grid: GridContainer = $MarginContainer/SlotGrid
+@onready var slot_grid: GridContainer = $SlotGrid
+
+@export var slot_grid_columns : int = 4
+
+func _ready() -> void:
+	slot_grid.columns = slot_grid_columns
 
 func set_inventory_data(inventory_data: InventoryData) -> void:
 	slot_interact.connect(inventory_data._on_slot_interact)

@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://ca2nfu5f3mxon"]
+[gd_scene load_steps=3 format=3 uid="uid://ca2nfu5f3mxon"]
 
 [ext_resource type="Script" uid="uid://du0tcm0odticf" path="res://demo/Scenes/grabbed_slot.gd" id="1_qihnf"]
+[ext_resource type="FontFile" uid="uid://0dxrlodpwin3" path="res://demo/assets/font/Jersey10-Regular.ttf" id="2_afap7"]
 
 [node name="GrabbedSlot" type="PanelContainer"]
 self_modulate = Color(1, 1, 1, 0)
@@ -33,5 +34,7 @@ size_flags_horizontal = 8
 size_flags_vertical = 8
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 3
+theme_override_fonts/font = ExtResource("2_afap7")
+theme_override_font_sizes/font_size = 24
 horizontal_alignment = 2
 vertical_alignment = 2

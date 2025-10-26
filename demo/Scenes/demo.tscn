@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://dcsrgwybd0j56"]
+[gd_scene load_steps=40 format=3 uid="uid://dcsrgwybd0j56"]
 
 [ext_resource type="Script" uid="uid://btny1lsbqjd2y" path="res://demo/Scenes/demo.gd" id="1_4wuso"]
 [ext_resource type="PackedScene" uid="uid://chesov7c7vxtk" path="res://demo/Scenes/inventory.tscn" id="1_rf8h5"]
@@ -9,10 +9,13 @@
 [ext_resource type="Script" uid="uid://duaaoh5ibuydx" path="res://src/inventory_data.gd" id="5_qpcex"]
 [ext_resource type="Script" uid="uid://dfb3cg5dwokyd" path="res://src/slot_data.gd" id="6_bgdrs"]
 [ext_resource type="PackedScene" uid="uid://ca2nfu5f3mxon" path="res://demo/Scenes/grabbed_slot.tscn" id="6_d01u1"]
+[ext_resource type="StyleBox" uid="uid://by32m6xoja1m" path="res://demo/UI/inventory_style_box.tres" id="9_55lo8"]
 [ext_resource type="Texture2D" uid="uid://b2rutpht1wqpe" path="res://demo/assets/#1 - Transparent Icons.png" id="10_qpcex"]
+[ext_resource type="FontFile" uid="uid://0dxrlodpwin3" path="res://demo/assets/font/Jersey10-Regular.ttf" id="11_nvxib"]
 [ext_resource type="Theme" uid="uid://dw1ud1cj8ntu7" path="res://demo/UI/buttons_theme.tres" id="12_ldnim"]
 [ext_resource type="Script" uid="uid://v5as1dodl3n4" path="res://demo/Scenes/ui_audio.gd" id="12_y4fsj"]
 [ext_resource type="AudioStream" uid="uid://608fc5lnsgw1" path="res://demo/assets/audio/UI sounds/click1.ogg" id="13_b1duo"]
+[ext_resource type="Texture2D" uid="uid://c7rkl5ej617m1" path="res://demo/assets/tile_0018.png" id="13_ee5ur"]
 [ext_resource type="AudioStream" uid="uid://cerpl2itfj6qc" path="res://demo/assets/audio/UI sounds/rollover2.ogg" id="14_b1duo"]
 [ext_resource type="AudioStream" uid="uid://c6ujiuvsc51yh" path="res://demo/assets/audio/UI sounds/rollover5.ogg" id="15_5et70"]
 
@@ -55,15 +58,37 @@ region = Rect2(352, 608, 32, 32)
 
 [sub_resource type="Resource" id="Resource_5ccn5"]
 script = ExtResource("5_qpcex")
-slot_datas = Array[ExtResource("6_bgdrs")]([null, null, null, null, null, null, null, null])
+slot_datas = Array[ExtResource("6_bgdrs")]([null, null, null, null, null, null, null, null, null, null, null, null])
 accepted_item_tags = Array[String](["material"])
 empty_slot_icon = SubResource("AtlasTexture_qpcex")
 metadata/_custom_type_script = "uid://duaaoh5ibuydx"
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_eu3oh"]
+atlas = ExtResource("10_qpcex")
+region = Rect2(64, 480, 32, 32)
+
+[sub_resource type="Resource" id="Resource_ee5ur"]
+script = ExtResource("5_qpcex")
+slot_datas = Array[ExtResource("6_bgdrs")]([null, null, null, null, null, null, null, null, null, null, null, null])
+accepted_item_tags = Array[String](["consumable"])
+empty_slot_icon = SubResource("AtlasTexture_eu3oh")
+metadata/_custom_type_script = "uid://duaaoh5ibuydx"
+
 [sub_resource type="Resource" id="Resource_qpcex"]
 script = ExtResource("5_qpcex")
-slot_datas = Array[ExtResource("6_bgdrs")]([null, null, null, null])
+slot_datas = Array[ExtResource("6_bgdrs")]([null, null, null, null, null, null, null, null])
 metadata/_custom_type_script = "uid://duaaoh5ibuydx"
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nvxib"]
+bg_color = Color(0.101960786, 0.0627451, 0.043137256, 1)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_55lo8"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+texture = ExtResource("10_qpcex")
+region_rect = Rect2(34, 192, 28, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ldnim"]
 atlas = ExtResource("10_qpcex")
@@ -73,9 +98,34 @@ region = Rect2(0, 544, 32, 32)
 atlas = ExtResource("10_qpcex")
 region = Rect2(32, 544, 32, 32)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_4bcne"]
+atlas = ExtResource("10_qpcex")
+region = Rect2(0, 448, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e8vdx"]
+atlas = ExtResource("10_qpcex")
+region = Rect2(0, 288, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cxict"]
+atlas = ExtResource("10_qpcex")
+region = Rect2(32, 224, 32, 32)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_bgdrs"]
 atlas = ExtResource("10_qpcex")
 region = Rect2(224, 224, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nvxib"]
+atlas = ExtResource("10_qpcex")
+region = Rect2(96, 256, 32, 32)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_cxict"]
+content_margin_left = 15.0
+content_margin_right = 15.0
+texture = ExtResource("13_ee5ur")
+texture_margin_left = 10.0
+texture_margin_top = 10.0
+texture_margin_right = 10.0
+texture_margin_bottom = 10.0
 
 [node name="Demo" type="Node"]
 script = ExtResource("1_4wuso")
@@ -86,13 +136,25 @@ chestgear_inventory_data = SubResource("Resource_5et70")
 headgear_inventory_data = SubResource("Resource_nvxib")
 footgear_inventory_data = SubResource("Resource_cxict")
 
-[node name="Container1" parent="." instance=ExtResource("4_5ccn5")]
+[node name="MaterialContainer" parent="." instance=ExtResource("4_5ccn5")]
 inventory_data = SubResource("Resource_5ccn5")
 
-[node name="Container2" parent="." instance=ExtResource("4_5ccn5")]
+[node name="ConsumableContainer" parent="." instance=ExtResource("4_5ccn5")]
+inventory_data = SubResource("Resource_ee5ur")
+
+[node name="SmallContainer" parent="." instance=ExtResource("4_5ccn5")]
 inventory_data = SubResource("Resource_qpcex")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Panel" type="Panel" parent="CanvasLayer"]
+texture_filter = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_nvxib")
 
 [node name="InventoryInterface" type="Control" parent="CanvasLayer"]
 layout_mode = 3
@@ -105,26 +167,50 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("4_biukc")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/InventoryInterface"]
+[node name="PlayerInvContainer" type="PanelContainer" parent="CanvasLayer/InventoryInterface"]
+texture_filter = 1
 layout_mode = 0
 offset_right = 40.0
-offset_bottom = 40.0
+offset_bottom = 44.0
+theme_override_styles/panel = ExtResource("9_55lo8")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/InventoryInterface/HBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/InventoryInterface/PlayerInvContainer"]
 layout_mode = 2
-theme_override_constants/separation = 12
+theme_override_constants/separation = 10
 
-[node name="PlayerHeadgearInventory" parent="CanvasLayer/InventoryInterface/HBoxContainer/VBoxContainer" instance=ExtResource("1_rf8h5")]
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/InventoryInterface/PlayerInvContainer/HBoxContainer"]
 layout_mode = 2
+theme_override_constants/separation = 0
 
-[node name="PlayerChestgearInventory" parent="CanvasLayer/InventoryInterface/HBoxContainer/VBoxContainer" instance=ExtResource("1_rf8h5")]
-layout_mode = 2
-
-[node name="PlayerFootgearInventory" parent="CanvasLayer/InventoryInterface/HBoxContainer/VBoxContainer" instance=ExtResource("1_rf8h5")]
+[node name="PlayerHeadgearInventory" parent="CanvasLayer/InventoryInterface/PlayerInvContainer/HBoxContainer/VBoxContainer" instance=ExtResource("1_rf8h5")]
 layout_mode = 2
 
-[node name="PlayerInventory" parent="CanvasLayer/InventoryInterface/HBoxContainer" instance=ExtResource("1_rf8h5")]
+[node name="PlayerChestgearInventory" parent="CanvasLayer/InventoryInterface/PlayerInvContainer/HBoxContainer/VBoxContainer" instance=ExtResource("1_rf8h5")]
 layout_mode = 2
+
+[node name="PlayerFootgearInventory" parent="CanvasLayer/InventoryInterface/PlayerInvContainer/HBoxContainer/VBoxContainer" instance=ExtResource("1_rf8h5")]
+layout_mode = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/InventoryInterface/PlayerInvContainer/HBoxContainer/VBoxContainer"]
+texture_filter = 1
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxTexture_55lo8")
+
+[node name="TotalDefenseLabel" type="Label" parent="CanvasLayer/InventoryInterface/PlayerInvContainer/HBoxContainer/VBoxContainer/PanelContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.91764706, 0.77254903, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 6
+theme_override_fonts/font = ExtResource("11_nvxib")
+theme_override_font_sizes/font_size = 29
+text = "0.0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PlayerInventory" parent="CanvasLayer/InventoryInterface/PlayerInvContainer/HBoxContainer" instance=ExtResource("1_rf8h5")]
+layout_mode = 2
+slot_grid_columns = 5
 
 [node name="ExternalInventory" parent="CanvasLayer/InventoryInterface" instance=ExtResource("1_rf8h5")]
 visible = false
@@ -135,6 +221,7 @@ anchor_right = 1.0
 offset_left = -30.0
 offset_right = 0.0
 grow_horizontal = 0
+theme_override_styles/panel = ExtResource("9_55lo8")
 
 [node name="GrabbedSlot" parent="CanvasLayer/InventoryInterface" instance=ExtResource("6_d01u1")]
 visible = false
@@ -154,60 +241,182 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/UI"]
+[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/UI"]
+texture_filter = 1
 layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
+anchors_preset = 12
 anchor_top = 1.0
-anchor_right = 0.5
+anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -402.0
-offset_top = -108.0
-offset_right = 402.0
+offset_top = -203.0
 grow_horizontal = 2
 grow_vertical = 0
+theme_override_styles/panel = ExtResource("9_55lo8")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/UI/PanelContainer"]
+layout_mode = 2
 theme_override_constants/separation = 10
 
-[node name="GridContainer" type="GridContainer" parent="CanvasLayer/UI/HBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/UI/PanelContainer/HBoxContainer"]
 layout_mode = 2
-columns = 2
 
-[node name="PickWoodButton" type="Button" parent="CanvasLayer/UI/HBoxContainer/GridContainer" groups=["ui_button"]]
+[node name="Label" type="Label" parent="CanvasLayer/UI/PanelContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.94509804, 0.8235294, 1)
+theme_override_colors/font_outline_color = Color(0.27450982, 0.19215687, 0.105882354, 1)
+theme_override_constants/outline_size = 10
+theme_override_fonts/font = ExtResource("11_nvxib")
+theme_override_font_sizes/font_size = 32
+text = "Item pick-up:"
+
+[node name="GridContainer" type="GridContainer" parent="CanvasLayer/UI/PanelContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+columns = 6
+
+[node name="Pick1WoodButton" type="Button" parent="CanvasLayer/UI/PanelContainer/HBoxContainer/VBoxContainer/GridContainer" groups=["ui_button"]]
 layout_mode = 2
 theme = ExtResource("12_ldnim")
-text = "pick up 1 wood"
+text = "x1"
 icon = SubResource("AtlasTexture_ldnim")
 
-[node name="PickStoneButton" type="Button" parent="CanvasLayer/UI/HBoxContainer/GridContainer" groups=["ui_button"]]
+[node name="Pick5WoodButton" type="Button" parent="CanvasLayer/UI/PanelContainer/HBoxContainer/VBoxContainer/GridContainer" groups=["ui_button"]]
 layout_mode = 2
 theme = ExtResource("12_ldnim")
-text = "pick up 1 stone"
+text = "x5"
+icon = SubResource("AtlasTexture_ldnim")
+
+[node name="Pick1StoneButton" type="Button" parent="CanvasLayer/UI/PanelContainer/HBoxContainer/VBoxContainer/GridContainer" groups=["ui_button"]]
+layout_mode = 2
+theme = ExtResource("12_ldnim")
+text = "x1"
 icon = SubResource("AtlasTexture_y4fsj")
 
-[node name="PickArmourButton" type="Button" parent="CanvasLayer/UI/HBoxContainer/GridContainer" groups=["ui_button"]]
+[node name="Pick5StoneButton" type="Button" parent="CanvasLayer/UI/PanelContainer/HBoxContainer/VBoxContainer/GridContainer" groups=["ui_button"]]
 layout_mode = 2
 theme = ExtResource("12_ldnim")
-text = "pick up 1 armour"
+text = "x5"
+icon = SubResource("AtlasTexture_y4fsj")
+
+[node name="Control" type="Control" parent="CanvasLayer/UI/PanelContainer/HBoxContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+
+[node name="Control2" type="Control" parent="CanvasLayer/UI/PanelContainer/HBoxContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+
+[node name="Pick1AppleButton" type="Button" parent="CanvasLayer/UI/PanelContainer/HBoxContainer/VBoxContainer/GridContainer" groups=["ui_button"]]
+layout_mode = 2
+theme = ExtResource("12_ldnim")
+text = "x1"
+icon = SubResource("AtlasTexture_4bcne")
+
+[node name="Pick5AppleButton" type="Button" parent="CanvasLayer/UI/PanelContainer/HBoxContainer/VBoxContainer/GridContainer" groups=["ui_button"]]
+layout_mode = 2
+theme = ExtResource("12_ldnim")
+text = "x5"
+icon = SubResource("AtlasTexture_4bcne")
+
+[node name="Pick1HPotionButton" type="Button" parent="CanvasLayer/UI/PanelContainer/HBoxContainer/VBoxContainer/GridContainer" groups=["ui_button"]]
+layout_mode = 2
+theme = ExtResource("12_ldnim")
+text = "x1"
+icon = SubResource("AtlasTexture_e8vdx")
+
+[node name="Pick5HPotionButton" type="Button" parent="CanvasLayer/UI/PanelContainer/HBoxContainer/VBoxContainer/GridContainer" groups=["ui_button"]]
+layout_mode = 2
+theme = ExtResource("12_ldnim")
+text = "x5"
+icon = SubResource("AtlasTexture_e8vdx")
+
+[node name="Control3" type="Control" parent="CanvasLayer/UI/PanelContainer/HBoxContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+
+[node name="Control4" type="Control" parent="CanvasLayer/UI/PanelContainer/HBoxContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+
+[node name="Pick1HelmetButton" type="Button" parent="CanvasLayer/UI/PanelContainer/HBoxContainer/VBoxContainer/GridContainer" groups=["ui_button"]]
+layout_mode = 2
+theme = ExtResource("12_ldnim")
+text = "x1"
+icon = SubResource("AtlasTexture_cxict")
+
+[node name="Pick1ArmourButton" type="Button" parent="CanvasLayer/UI/PanelContainer/HBoxContainer/VBoxContainer/GridContainer" groups=["ui_button"]]
+layout_mode = 2
+theme = ExtResource("12_ldnim")
+text = "x1"
 icon = SubResource("AtlasTexture_bgdrs")
 
-[node name="Container1Button" type="Button" parent="CanvasLayer/UI/HBoxContainer" groups=["ui_button"]]
+[node name="Pick1BootsButton" type="Button" parent="CanvasLayer/UI/PanelContainer/HBoxContainer/VBoxContainer/GridContainer" groups=["ui_button"]]
 layout_mode = 2
-size_flags_vertical = 0
 theme = ExtResource("12_ldnim")
-text = "toggle material 
-container"
+text = "x1"
+icon = SubResource("AtlasTexture_nvxib")
 
-[node name="Container2Button" type="Button" parent="CanvasLayer/UI/HBoxContainer" groups=["ui_button"]]
+[node name="VBoxContainer2" type="VBoxContainer" parent="CanvasLayer/UI/PanelContainer/HBoxContainer"]
+custom_minimum_size = Vector2(250, 0)
 layout_mode = 2
-size_flags_vertical = 0
-theme = ExtResource("12_ldnim")
-text = "toggle container2"
 
-[node name="PrintDefenceButton" type="Button" parent="CanvasLayer/UI/HBoxContainer" groups=["ui_button"]]
+[node name="Label" type="Label" parent="CanvasLayer/UI/PanelContainer/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.94509804, 0.8235294, 1)
+theme_override_colors/font_outline_color = Color(0.27450982, 0.19215687, 0.105882354, 1)
+theme_override_constants/outline_size = 10
+theme_override_fonts/font = ExtResource("11_nvxib")
+theme_override_font_sizes/font_size = 32
+text = "Toggle Containers:"
+
+[node name="MaterialContainerButton" type="Button" parent="CanvasLayer/UI/PanelContainer/HBoxContainer/VBoxContainer2" groups=["ui_button"]]
 layout_mode = 2
 size_flags_vertical = 0
 theme = ExtResource("12_ldnim")
-text = "print defence"
+text = "material container"
+
+[node name="ConsumableContainerButton" type="Button" parent="CanvasLayer/UI/PanelContainer/HBoxContainer/VBoxContainer2" groups=["ui_button"]]
+layout_mode = 2
+size_flags_vertical = 0
+theme = ExtResource("12_ldnim")
+text = "consumable container"
+
+[node name="SmallContainerButton" type="Button" parent="CanvasLayer/UI/PanelContainer/HBoxContainer/VBoxContainer2" groups=["ui_button"]]
+layout_mode = 2
+size_flags_vertical = 0
+theme = ExtResource("12_ldnim")
+text = "small container"
+
+[node name="VBoxContainer3" type="VBoxContainer" parent="CanvasLayer/UI/PanelContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="CanvasLayer/UI/PanelContainer/HBoxContainer/VBoxContainer3"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.94509804, 0.8235294, 1)
+theme_override_colors/font_outline_color = Color(0.27450982, 0.19215687, 0.105882354, 1)
+theme_override_constants/outline_size = 10
+theme_override_fonts/font = ExtResource("11_nvxib")
+theme_override_font_sizes/font_size = 32
+text = "Messages:"
+
+[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/UI/PanelContainer/HBoxContainer/VBoxContainer3"]
+texture_filter = 1
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxTexture_cxict")
+
+[node name="MessagesTextLabel" type="RichTextLabel" parent="CanvasLayer/UI/PanelContainer/HBoxContainer/VBoxContainer3/PanelContainer"]
+layout_mode = 2
+theme_override_colors/default_color = Color(0.102625646, 0.06492378, 0.042168945, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_fonts/normal_font = ExtResource("11_nvxib")
+theme_override_fonts/bold_font = ExtResource("11_nvxib")
+theme_override_fonts/bold_italics_font = ExtResource("11_nvxib")
+theme_override_fonts/italics_font = ExtResource("11_nvxib")
+theme_override_fonts/mono_font = ExtResource("11_nvxib")
+theme_override_font_sizes/normal_font_size = 19
+text = "Slot-based inventory
+By 
+Shayan Masoudzadeh
+--------------------"
+scroll_active = false
+scroll_following = true
 
 [node name="UIAudio" type="Node" parent="."]
 script = ExtResource("12_y4fsj")
@@ -228,9 +437,17 @@ pitch_scale = 1.3
 
 [connection signal="drop_slot_data" from="CanvasLayer/InventoryInterface" to="." method="_on_inventory_interface_drop_slot_data"]
 [connection signal="gui_input" from="CanvasLayer/InventoryInterface" to="CanvasLayer/InventoryInterface" method="_on_gui_input"]
-[connection signal="pressed" from="CanvasLayer/UI/HBoxContainer/GridContainer/PickWoodButton" to="Player" method="_on_pick_wood_button_pressed"]
-[connection signal="pressed" from="CanvasLayer/UI/HBoxContainer/GridContainer/PickStoneButton" to="Player" method="_on_pick_stone_button_pressed"]
-[connection signal="pressed" from="CanvasLayer/UI/HBoxContainer/GridContainer/PickArmourButton" to="Player" method="_on_pick_armour_button_pressed"]
-[connection signal="pressed" from="CanvasLayer/UI/HBoxContainer/Container1Button" to="." method="_on_container1_button_pressed"]
-[connection signal="pressed" from="CanvasLayer/UI/HBoxContainer/Container2Button" to="." method="_on_container_2_button_pressed"]
-[connection signal="pressed" from="CanvasLayer/UI/HBoxContainer/PrintDefenceButton" to="Player" method="_on_print_defence_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/UI/PanelContainer/HBoxContainer/VBoxContainer/GridContainer/Pick1WoodButton" to="Player" method="_on_pick_1_wood_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/UI/PanelContainer/HBoxContainer/VBoxContainer/GridContainer/Pick5WoodButton" to="Player" method="_on_pick_5_wood_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/UI/PanelContainer/HBoxContainer/VBoxContainer/GridContainer/Pick1StoneButton" to="Player" method="_on_pick_1_stone_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/UI/PanelContainer/HBoxContainer/VBoxContainer/GridContainer/Pick5StoneButton" to="Player" method="_on_pick_5_stone_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/UI/PanelContainer/HBoxContainer/VBoxContainer/GridContainer/Pick1AppleButton" to="Player" method="_on_pick_1_apple_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/UI/PanelContainer/HBoxContainer/VBoxContainer/GridContainer/Pick5AppleButton" to="Player" method="_on_pick_5_apple_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/UI/PanelContainer/HBoxContainer/VBoxContainer/GridContainer/Pick1HPotionButton" to="Player" method="_on_pick_1h_potion_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/UI/PanelContainer/HBoxContainer/VBoxContainer/GridContainer/Pick5HPotionButton" to="Player" method="_on_pick_5h_potion_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/UI/PanelContainer/HBoxContainer/VBoxContainer/GridContainer/Pick1HelmetButton" to="Player" method="_on_pick_1_helmet_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/UI/PanelContainer/HBoxContainer/VBoxContainer/GridContainer/Pick1ArmourButton" to="Player" method="_on_pick_1_armour_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/UI/PanelContainer/HBoxContainer/VBoxContainer/GridContainer/Pick1BootsButton" to="Player" method="_on_pick_1_boots_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/UI/PanelContainer/HBoxContainer/VBoxContainer2/MaterialContainerButton" to="." method="_on_material_container_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/UI/PanelContainer/HBoxContainer/VBoxContainer2/ConsumableContainerButton" to="." method="_on_consumable_container_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/UI/PanelContainer/HBoxContainer/VBoxContainer2/SmallContainerButton" to="." method="_on_small_container_button_pressed"]

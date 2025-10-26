@@ -6,12 +6,14 @@ signal interface_sound(stream : String)
 var grabbed_slot_data: SlotData
 var current_external_inventory_data: InventoryData 
 
-@onready var player_inventory: PanelContainer = $HBoxContainer/PlayerInventory
-@onready var player_headgear_inventory: PanelContainer = $HBoxContainer/VBoxContainer/PlayerHeadgearInventory
-@onready var player_chestgear_inventory: PanelContainer = $HBoxContainer/VBoxContainer/PlayerChestgearInventory
-@onready var player_footgear_inventory: PanelContainer = $HBoxContainer/VBoxContainer/PlayerFootgearInventory
+@onready var player_inventory: PanelContainer = $PlayerInvContainer/HBoxContainer/PlayerInventory
+@onready var player_headgear_inventory: PanelContainer = $PlayerInvContainer/HBoxContainer/VBoxContainer/PlayerHeadgearInventory
+@onready var player_chestgear_inventory: PanelContainer = $PlayerInvContainer/HBoxContainer/VBoxContainer/PlayerChestgearInventory
+@onready var player_footgear_inventory: PanelContainer = $PlayerInvContainer/HBoxContainer/VBoxContainer/PlayerFootgearInventory
 @onready var external_inventory: PanelContainer = $ExternalInventory
 @onready var grabbed_slot: PanelContainer = $GrabbedSlot
+
+@onready var total_defense_label: Label = $PlayerInvContainer/HBoxContainer/VBoxContainer/PanelContainer/TotalDefenseLabel
 
 func _process(_delta: float) -> void:
 	if grabbed_slot.visible:
@@ -138,3 +140,6 @@ func _on_gui_input(event: InputEvent) -> void:
 						grabbed_slot_data = null
 		update_grabbed_slot()
 		interface_sound.emit("put")
+
+func _update_total_defense(total_defense: float) -> void:
+	total_defense_label.text = "%s" % total_defense
